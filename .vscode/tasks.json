@@ -1,0 +1,73 @@
+{
+	"version": "2.0.0",
+	"inputs": [
+		{
+			"id": "uploadPort",
+			"type": "promptString",
+			"description": "Upload port or host (example: 192.168.10.85 or /dev/cu.usbserial-xxxx)",
+			"default": "192.168.10.85"
+		},
+		{
+			"id": "uploadOtaHost",
+			"type": "promptString",
+			"description": "OTA host or IP (example: 192.168.10.85)",
+			"default": "192.168.10.85"
+		},
+		{
+			"id": "uploadSerialPort",
+			"type": "promptString",
+			"description": "Serial port (example: /dev/cu.usbserial-xxxx)",
+			"default": "/dev/cu.usbserial-xxxx"
+		}
+	],
+	"tasks": [
+		{
+			"label": "platformio build validate",
+			"type": "shell",
+			"command": "pio",
+			"args": [
+				"run"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "platformio uploadfs",
+			"type": "shell",
+			"command": "pio",
+			"args": [
+				"run",
+				"--target",
+				"uploadfs",
+				"--upload-port",
+				"${input:uploadPort}"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "platformio uploadfs (ota)",
+			"type": "shell",
+			"command": "pio",
+			"args": [
+				"run",
+				"--target",
+				"uploadfs",
+				"--upload-port",
+				"${input:uploadOtaHost}"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "platformio uploadfs (serial)",
+			"type": "shell",
+			"command": "pio",
+			"args": [
+				"run",
+				"--target",
+				"uploadfs",
+				"--upload-port",
+				"${input:uploadSerialPort}"
+			],
+			"isBackground": false
+		}
+	]
+}
