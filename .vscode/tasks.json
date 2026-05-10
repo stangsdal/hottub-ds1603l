@@ -24,7 +24,7 @@
 		{
 			"label": "platformio build validate",
 			"type": "shell",
-			"command": "pio",
+			"command": "${workspaceFolder}/.venv/bin/pio",
 			"args": [
 				"run"
 			],
@@ -33,7 +33,7 @@
 		{
 			"label": "platformio uploadfs",
 			"type": "shell",
-			"command": "pio",
+			"command": "${workspaceFolder}/.venv/bin/pio",
 			"args": [
 				"run",
 				"--target",
@@ -46,9 +46,11 @@
 		{
 			"label": "platformio uploadfs (ota)",
 			"type": "shell",
-			"command": "pio",
+			"command": "${workspaceFolder}/.venv/bin/pio",
 			"args": [
 				"run",
+				"-e",
+				"esp12e_ota",
 				"--target",
 				"uploadfs",
 				"--upload-port",
@@ -59,11 +61,43 @@
 		{
 			"label": "platformio uploadfs (serial)",
 			"type": "shell",
-			"command": "pio",
+			"command": "${workspaceFolder}/.venv/bin/pio",
 			"args": [
 				"run",
+				"-e",
+				"esp12e",
 				"--target",
 				"uploadfs",
+				"--upload-port",
+				"${input:uploadSerialPort}"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "platformio upload (ota)",
+			"type": "shell",
+			"command": "${workspaceFolder}/.venv/bin/pio",
+			"args": [
+				"run",
+				"-e",
+				"esp12e_ota",
+				"--target",
+				"upload",
+				"--upload-port",
+				"${input:uploadOtaHost}"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "platformio upload (serial)",
+			"type": "shell",
+			"command": "${workspaceFolder}/.venv/bin/pio",
+			"args": [
+				"run",
+				"-e",
+				"esp12e",
+				"--target",
+				"upload",
 				"--upload-port",
 				"${input:uploadSerialPort}"
 			],
